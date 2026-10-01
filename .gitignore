@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.py[cod]
+build/
+dist/
+LightShort-Setup.exe
+lightshort.ico
+*.spec
+.pytest_cache/
