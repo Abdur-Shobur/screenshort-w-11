@@ -43,6 +43,7 @@ class App:
             menu=pystray.Menu(self._menu_items),
         )
         self._ensure_ico()
+        self._apply_startup()
         if not self.settings.get("seen_welcome"):
             self._create_shortcut_quietly()
         self.icon.run_detached(self._tray_ready)
@@ -62,6 +63,14 @@ class App:
                 sizes=[(16, 16), (32, 32), (48, 48), (256, 256)],
             )
         return path
+
+    def _apply_startup(self) -> None:
+        if not self.settings.get("start_with_windows"):
+            return
+        try:
+            set_run_at_startup(True)
+        except OSError as exc:
+            log(f"startup registration failed: {exc}")
 
     def _create_shortcut_quietly(self) -> None:
         try:

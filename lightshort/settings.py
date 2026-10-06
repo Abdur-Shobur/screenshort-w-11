@@ -12,7 +12,7 @@ APP_DIR = Path(os.environ.get("APPDATA", str(Path.home()))) / "LightShort"
 DEFAULTS = {
     "hotkey_f1": True,
     "hotkey_printscreen": True,
-    "start_with_windows": False,
+    "start_with_windows": True,
     "seen_welcome": False,
     "color": "#ff3b30",
     "stroke": 4,

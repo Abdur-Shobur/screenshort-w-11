@@ -138,7 +138,7 @@ def launch_command() -> str:
     return f'"{executable}" "{script}"'
 
 
-def set_run_at_startup(enabled: bool) -> None:
+def set_run_at_startup(enabled: bool, command: str | None = None) -> None:
     import winreg
 
     key = winreg.OpenKey(
@@ -149,7 +149,7 @@ def set_run_at_startup(enabled: bool) -> None:
     )
     try:
         if enabled:
-            winreg.SetValueEx(key, "LightShort", 0, winreg.REG_SZ, launch_command())
+            winreg.SetValueEx(key, "LightShort", 0, winreg.REG_SZ, command or launch_command())
         else:
             try:
                 winreg.DeleteValue(key, "LightShort")

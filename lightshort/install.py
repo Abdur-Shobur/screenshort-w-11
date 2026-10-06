@@ -66,6 +66,8 @@ def install_files() -> Path:
     if str(source).casefold() != str(target).casefold():
         _replace_exe(source, target)
     _create_shortcuts(target)
+    set_run_at_startup(True, f'"{target}"')
+    _remember_startup()
     stale = target.with_name("LightShort.exe.old")
     if stale.exists():
         try:
@@ -88,6 +90,12 @@ def _replace_exe(source: Path, target: Path) -> None:
         except OSError:
             pass
     shutil.copy2(source, target)
+
+
+def _remember_startup() -> None:
+    from lightshort.settings import Settings
+
+    Settings().set("start_with_windows", True)
 
 
 def _create_shortcuts(target: Path) -> None:
